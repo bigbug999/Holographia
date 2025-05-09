@@ -45,7 +45,7 @@ export function HolographicCard({
     <Tilt rotationFactor={rotationFactor}>
       <div
         className={cn(
-          "relative group bg-zinc-800 rounded-[4.55%/3.5%] border border-white/10",
+          "relative group bg-zinc-800 rounded-[4.55%/3.5%] border-2 border-zinc-600",
           className
         )}
         onMouseMove={handleMouseMove}
@@ -62,7 +62,7 @@ export function HolographicCard({
         {...props}
       >
         <div
-          className="absolute inset-0 pointer-events-none rounded-[4.55%/3.5%] border border-white/20"
+          className="absolute inset-0 pointer-events-none rounded-[4.55%/3.5%] border-2 border-zinc-600"
           style={{
             mixBlendMode: "color-dodge",
             backgroundImage: `
@@ -91,15 +91,16 @@ export function HolographicCard({
                 rgba(0, 0, 0, .25) 120%
               )
             `,
-            backgroundBlendMode: "exclusion, hue, hard-light, exclusion",
-            backgroundSize: "var(--imgsize), 200% 700%, 300%, 200%",
+            backgroundBlendMode: "soft-light, hue, hard-light, exclusion",
+            backgroundSize: "var(--imgsize), 150% 500%, 300%, 200%",
             backgroundPosition: "center, 0% var(--posy), var(--posx) var(--posy), var(--posx) var(--posy)",
-            filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(2) saturate(1.5)",
-            WebkitFilter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(2) saturate(1.5)",
+            filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
+            WebkitFilter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
+            opacity: 0.6
           }}
         />
         <div
-          className="absolute inset-0 pointer-events-none rounded-[4.55%/3.5%] border border-white/20"
+          className="absolute inset-0 pointer-events-none rounded-[4.55%/3.5%] border-2 border-zinc-600"
           style={{
             mixBlendMode: "exclusion",
             backgroundImage: `
@@ -128,12 +129,12 @@ export function HolographicCard({
                 rgba(0, 0, 0, .25) 120%
               )
             `,
-            backgroundBlendMode: "exclusion, hue, hard-light, exclusion",
-            backgroundSize: "var(--imgsize), 200% 700%, 300%, 200%",
+            backgroundBlendMode: "soft-light, hue, hard-light, exclusion",
+            backgroundSize: "var(--imgsize), 75% 250%, 150%, 100%",
             backgroundPosition: "center, 0% calc(100% - var(--posy)), calc(100% - var(--posx)) calc(100% - var(--posy)), calc(100% - var(--posx)) calc(100% - var(--posy))",
-            filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(2) saturate(1.5)",
-            WebkitFilter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(2) saturate(1.5)",
-            opacity: 0.5
+            filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
+            WebkitFilter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
+            opacity: 0.3
           }}
         />
         <svg 
