@@ -18,10 +18,9 @@ export function HolographicCard({
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 })
   const [hyp, setHyp] = React.useState(0)
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width) * 100
-    const y = ((e.clientY - rect.top) / rect.height) * 100
+  const updatePosition = (clientX: number, clientY: number, rect: DOMRect) => {
+    const x = ((clientX - rect.left) / rect.width) * 100
+    const y = ((clientY - rect.top) / rect.height) * 100
     setMousePosition({ x, y })
     
     // Calculate hypotenuse for brightness effect
@@ -29,6 +28,17 @@ export function HolographicCard({
     const centerY = 50
     const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2))
     setHyp(distance / 50) // Normalize to 0-1 range
+  }
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    updatePosition(e.clientX, e.clientY, rect)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const touch = e.touches[0]
+    updatePosition(touch.clientX, touch.clientY, rect)
   }
 
   return (
@@ -39,6 +49,7 @@ export function HolographicCard({
           className
         )}
         onMouseMove={handleMouseMove}
+        onTouchMove={handleTouchMove}
         style={{
           "--posx": `${mousePosition.x}%`,
           "--posy": `${mousePosition.y}%`,
