@@ -10,14 +10,18 @@ function TiltCard1() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundImage: "url('/img/illusion.png')",
-          backgroundSize: '50%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'repeat',
+          backgroundImage: "url('/img/illusion.png'), repeating-linear-gradient(0deg, rgb(255, 119, 115) calc(var(--space) * 1), rgba(255, 237, 95, 1) calc(var(--space) * 2), rgba(168, 255, 95, 1) calc(var(--space) * 3), rgba(131, 255, 247, 1) calc(var(--space) * 4), rgba(120, 148, 255, 1) calc(var(--space) * 5), rgb(216, 117, 255) calc(var(--space) * 6), rgb(255, 119, 115) calc(var(--space) * 7)), repeating-linear-gradient(var(--angle), #0e152e 0%, hsl(180, 10%, 60%) 3.8%, hsl(180, 29%, 66%) 4.5%, hsl(180, 10%, 60%) 5.2%, #0e152e 10%, #0e152e 12%)",
+          backgroundSize: '50%, 200% 700%, 100% 100%',
+          backgroundPosition: '0% var(--posy), var(--posx) var(--posy), center',
+          backgroundRepeat: 'repeat, no-repeat, no-repeat',
           border: '2px solid #222',
           borderRadius: '20px',
           boxSizing: 'border-box',
           boxShadow: '0 4px 24px 0 rgba(0,0,0,0.08)',
+          // @ts-ignore
+          '--angle': '135deg',
+          '--posx': '0%',
+          '--posy': '0%',
         }}
       >
         <svg width="320" height="420" viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
