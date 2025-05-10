@@ -66,6 +66,10 @@ export function HolographicCard({
           style={{
             mixBlendMode: "color-dodge",
             transform: "translate3d(0,0,0)",
+            backfaceVisibility: "hidden",
+            perspective: "1000px",
+            WebkitBackfaceVisibility: "hidden",
+            WebkitPerspective: "1000px",
             backgroundImage: `
               url('/img/illusion.png'),
               repeating-linear-gradient(0deg, 
@@ -92,7 +96,7 @@ export function HolographicCard({
                 rgba(0, 0, 0, .25) 120%
               )
             `,
-            backgroundBlendMode: "soft-light, hue, hard-light, exclusion",
+            backgroundBlendMode: "soft-light, overlay, hard-light, exclusion",
             backgroundSize: "var(--imgsize), 150% 500%, 300%, 200%",
             backgroundPosition: "center, 0% var(--posy), var(--posx) var(--posy), var(--posx) var(--posy)",
             filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
@@ -105,6 +109,10 @@ export function HolographicCard({
           style={{
             mixBlendMode: "exclusion",
             transform: "translate3d(0,0,0)",
+            backfaceVisibility: "hidden",
+            perspective: "1000px",
+            WebkitBackfaceVisibility: "hidden",
+            WebkitPerspective: "1000px",
             backgroundImage: `
               url('/img/illusion.png'),
               repeating-linear-gradient(0deg, 
@@ -131,7 +139,7 @@ export function HolographicCard({
                 rgba(0, 0, 0, .25) 120%
               )
             `,
-            backgroundBlendMode: "soft-light, hue, hard-light, exclusion",
+            backgroundBlendMode: "soft-light, overlay, hard-light, exclusion",
             backgroundSize: "var(--imgsize), 75% 250%, 150%, 100%",
             backgroundPosition: "center, 0% calc(100% - var(--posy)), calc(100% - var(--posx)) calc(100% - var(--posy)), calc(100% - var(--posx)) calc(100% - var(--posy))",
             filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
