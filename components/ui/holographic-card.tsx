@@ -77,7 +77,7 @@ export function HolographicCard({
         <div
           className="absolute inset-0 pointer-events-none rounded-[4.55%/3.5%] border-2 border-zinc-600"
           style={{
-            mixBlendMode: "color-dodge",
+            mixBlendMode: "soft-light",
             transform: "translate3d(0,0,0)",
             backfaceVisibility: "hidden",
             perspective: "1000px",
@@ -85,7 +85,7 @@ export function HolographicCard({
             WebkitPerspective: "1000px",
             transition: isMobile ? "all var(--transition-duration) var(--transition-timing)" : "none",
             backgroundImage: `
-              url('/img/illusion.png'),
+              url('/img/cosmos-top-trans.png'),
               repeating-linear-gradient(0deg, 
                 rgb(255, 119, 115) calc(var(--space) * 1),
                 rgba(255, 237, 95, 1) calc(var(--space) * 2),
@@ -105,13 +105,13 @@ export function HolographicCard({
               ),
               radial-gradient(
                 farthest-corner circle at var(--posx) var(--posy),
-                rgba(0, 0, 0, .1) 12%,
-                rgba(0, 0, 0, .15) 20%,
-                rgba(0, 0, 0, .25) 120%
+                rgba(0, 0, 0, .2) 12%,
+                rgba(0, 0, 0, .3) 20%,
+                rgba(0, 0, 0, .4) 120%
               )
             `,
             backgroundBlendMode: "exclusion, hue, hard-light, exclusion",
-            backgroundSize: "50%, 300% 500%, 300%, 200%",
+            backgroundSize: "50%, 200% 700%, 300%, 200%",
             backgroundPosition: "center, 50% var(--posy), var(--posx) var(--posy), var(--posx) var(--posy)",
             backgroundRepeat: "var(--img-repeat), no-repeat, no-repeat, no-repeat",
             filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
@@ -130,7 +130,7 @@ export function HolographicCard({
             WebkitPerspective: "1000px",
             transition: isMobile ? "all var(--transition-duration) var(--transition-timing)" : "none",
             backgroundImage: `
-              url('/img/illusion.png'),
+              url('/img/cosmos-top-trans.png'),
               repeating-linear-gradient(0deg, 
                 rgb(255, 119, 115) calc(var(--space) * 1),
                 rgba(255, 237, 95, 1) calc(var(--space) * 2),
@@ -150,14 +150,14 @@ export function HolographicCard({
               ),
               radial-gradient(
                 farthest-corner circle at calc(100% - var(--posx)) calc(100% - var(--posy)),
-                rgba(0, 0, 0, .1) 12%,
-                rgba(0, 0, 0, .15) 20%,
-                rgba(0, 0, 0, .25) 120%
+                rgba(0, 0, 0, .2) 12%,
+                rgba(0, 0, 0, .3) 20%,
+                rgba(0, 0, 0, .4) 120%
               )
             `,
             backgroundBlendMode: "exclusion, hue, hard-light, exclusion",
-            backgroundSize: "50%, 300% 250%, 150%, 100%",
-            backgroundPosition: "center, 50% calc(50% + (var(--posy) * 0.5)), var(--posx) var(--posy), var(--posx) var(--posy)",
+            backgroundSize: "50%, 200% 700%, 300%, 200%",
+            backgroundPosition: "center, 50% calc(100% - var(--posy)), calc(100% - var(--posx)) calc(100% - var(--posy)), calc(100% - var(--posx)) calc(100% - var(--posy))",
             backgroundRepeat: "var(--img-repeat), no-repeat, no-repeat, no-repeat",
             filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
             WebkitFilter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
