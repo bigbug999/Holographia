@@ -17,6 +17,16 @@ export function HolographicCard({
 }: HolographicCardProps) {
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 })
   const [hyp, setHyp] = React.useState(0)
+  const [isMobile, setIsMobile] = React.useState(false)
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 768px)').matches)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const updatePosition = (clientX: number, clientY: number, rect: DOMRect) => {
     const x = ((clientX - rect.left) / rect.width) * 100
@@ -59,6 +69,8 @@ export function HolographicCard({
           "--imgsize": "50%",
           "--radius": "4.55% / 3.5%",
           "--img-repeat": "repeat",
+          "--transition-timing": isMobile ? "cubic-bezier(0.4, 0, 0.2, 1)" : "none",
+          "--transition-duration": isMobile ? "300ms" : "0ms",
         } as React.CSSProperties}
         {...props}
       >
@@ -71,6 +83,7 @@ export function HolographicCard({
             perspective: "1000px",
             WebkitBackfaceVisibility: "hidden",
             WebkitPerspective: "1000px",
+            transition: isMobile ? "all var(--transition-duration) var(--transition-timing)" : "none",
             backgroundImage: `
               url('/img/illusion.png'),
               repeating-linear-gradient(0deg, 
@@ -115,6 +128,7 @@ export function HolographicCard({
             perspective: "1000px",
             WebkitBackfaceVisibility: "hidden",
             WebkitPerspective: "1000px",
+            transition: isMobile ? "all var(--transition-duration) var(--transition-timing)" : "none",
             backgroundImage: `
               url('/img/illusion.png'),
               repeating-linear-gradient(0deg, 
