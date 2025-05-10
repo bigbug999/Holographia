@@ -110,7 +110,7 @@ export function HolographicCard({
                 rgba(0, 0, 0, .25) 120%
               )
             `,
-            backgroundBlendMode: "soft-light, overlay, hard-light, exclusion",
+            backgroundBlendMode: "exclusion, hue, hard-light, exclusion",
             backgroundSize: "50%, 300% 500%, 300%, 200%",
             backgroundPosition: "center, 50% var(--posy), var(--posx) var(--posy), var(--posx) var(--posy)",
             backgroundRepeat: "var(--img-repeat), no-repeat, no-repeat, no-repeat",
@@ -155,7 +155,7 @@ export function HolographicCard({
                 rgba(0, 0, 0, .25) 120%
               )
             `,
-            backgroundBlendMode: "soft-light, overlay, hard-light, exclusion",
+            backgroundBlendMode: "exclusion, hue, hard-light, exclusion",
             backgroundSize: "50%, 300% 250%, 150%, 100%",
             backgroundPosition: "center, 50% calc(50% + (var(--posy) * 0.5)), var(--posx) var(--posy), var(--posx) var(--posy)",
             backgroundRepeat: "var(--img-repeat), no-repeat, no-repeat, no-repeat",
