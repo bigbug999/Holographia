@@ -98,8 +98,8 @@ export function HolographicCard({
               )
             `,
             backgroundBlendMode: "soft-light, overlay, hard-light, exclusion",
-            backgroundSize: "50%, 150% 500%, 300%, 200%",
-            backgroundPosition: "center, 0% var(--posy), var(--posx) var(--posy), var(--posx) var(--posy)",
+            backgroundSize: "50%, 300% 500%, 300%, 200%",
+            backgroundPosition: "center, 50% var(--posy), var(--posx) var(--posy), var(--posx) var(--posy)",
             backgroundRepeat: "var(--img-repeat), no-repeat, no-repeat, no-repeat",
             filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
             WebkitFilter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
@@ -142,8 +142,8 @@ export function HolographicCard({
               )
             `,
             backgroundBlendMode: "soft-light, overlay, hard-light, exclusion",
-            backgroundSize: "50%, 75% 250%, 150%, 100%",
-            backgroundPosition: "center, 0% calc(50% + (var(--posy) * 0.5)), calc(50% + (var(--posx) * 0.5)) calc(50% + (var(--posy) * 0.5)), calc(50% + (var(--posx) * 0.5)) calc(50% + (var(--posy) * 0.5))",
+            backgroundSize: "50%, 300% 250%, 150%, 100%",
+            backgroundPosition: "center, 50% calc(50% + (var(--posy) * 0.5)), calc(50% + (var(--posx) * 0.5)) calc(50% + (var(--posy) * 0.5)), calc(50% + (var(--posx) * 0.5)) calc(50% + (var(--posy) * 0.5))",
             backgroundRepeat: "var(--img-repeat), no-repeat, no-repeat, no-repeat",
             filter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
             WebkitFilter: "brightness(calc((var(--hyp) * 0.3) + 0.5)) contrast(1.2) saturate(1.1)",
