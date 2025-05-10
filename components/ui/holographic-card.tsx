@@ -65,6 +65,7 @@ export function HolographicCard({
           className="absolute inset-0 pointer-events-none rounded-[4.55%/3.5%] border-2 border-zinc-600"
           style={{
             mixBlendMode: "color-dodge",
+            transform: "translate3d(0,0,0)",
             backgroundImage: `
               url('/img/illusion.png'),
               repeating-linear-gradient(0deg, 
@@ -103,6 +104,7 @@ export function HolographicCard({
           className="absolute inset-0 pointer-events-none rounded-[4.55%/3.5%] border-2 border-zinc-600"
           style={{
             mixBlendMode: "exclusion",
+            transform: "translate3d(0,0,0)",
             backgroundImage: `
               url('/img/illusion.png'),
               repeating-linear-gradient(0deg, 
