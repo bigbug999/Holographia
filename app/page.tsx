@@ -34,13 +34,32 @@ function TiltCard1() {
             xmlns="http://www.w3.org/2000/svg"
             style={{ position: 'relative', zIndex: 3 }}
           >
-            {/* Large diamond background */}
-            <rect x="110" y="150" width="100" height="100" rx="10" transform="rotate(0 160 200)" fill="black" />
+            {/* Large rectangle background */}
+            <rect x="60" y="180" width="200" height="60" rx="10" transform="rotate(0 160 210)" fill="black" />
             {/* Top left small black circle */}
             <circle cx="48" cy="48" r="24" fill="black" />
             {/* Bottom right small black circle */}
             <circle cx="272" cy="372" r="24" fill="black" />
           </svg>
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 4,
+              fontFamily: 'Gotfridus',
+              color: 'white',
+              fontSize: '1rem',
+              textAlign: 'center',
+              textShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
+              letterSpacing: '0.1em',
+              width: '180px',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            HOLO-GRAPHIA
+          </div>
         </div>
       </div>
     </Tilt>
