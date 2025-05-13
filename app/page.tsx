@@ -1,4 +1,5 @@
 import { Tilt } from '@/components/motion-primitives/tilt';
+import { CardEffect } from './components/card-effect';
 
 function TiltCard1() {
   return (
@@ -11,7 +12,7 @@ function TiltCard1() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            border: "2px solid #D3CEC4",
+            border: "2px solid #222",
             borderRadius: 20,
             boxSizing: "border-box",
             boxShadow: "0 4px 24px 0 rgba(0,0,0,0.08)",
@@ -23,13 +24,14 @@ function TiltCard1() {
             position: "relative"
           }}
         >
+          <CardEffect />
           <svg
             width="320"
             height="420"
             viewBox="0 0 320 420"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ position: 'relative', zIndex: 1 }}
+            style={{ position: 'relative', zIndex: 3 }}
           >
             {/* Large diamond background */}
             <rect x="110" y="150" width="100" height="100" rx="10" transform="rotate(45 160 200)" fill="black" />
