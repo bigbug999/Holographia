@@ -6,6 +6,7 @@ export function CardEffect() {
   const cardRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number | undefined>(undefined);
   const timeRef = useRef<number>(0);
+  const isTouchingRef = useRef(false);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -28,26 +29,31 @@ export function CardEffect() {
       if (!timeRef.current) timeRef.current = timestamp;
       const progress = timestamp - timeRef.current;
       
-      // Create a gentle floating effect
-      const x = 50 + Math.sin(progress * 0.001) * 10;
-      const y = 50 + Math.cos(progress * 0.0008) * 10;
-      
-      document.documentElement.style.setProperty('--pointer-x', `${x}%`);
-      document.documentElement.style.setProperty('--pointer-y', `${y}%`);
+      // Only apply floating effect when not touching
+      if (!isTouchingRef.current) {
+        const x = 50 + Math.sin(progress * 0.001) * 10;
+        const y = 50 + Math.cos(progress * 0.0008) * 10;
+        
+        document.documentElement.style.setProperty('--pointer-x', `${x}%`);
+        document.documentElement.style.setProperty('--pointer-y', `${y}%`);
+      }
       
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     const handleTouchStart = (e: TouchEvent) => {
-      e.preventDefault();
+      isTouchingRef.current = true;
       const touch = e.touches[0];
       handleMove(touch.clientX, touch.clientY);
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
       const touch = e.touches[0];
       handleMove(touch.clientX, touch.clientY);
+    };
+
+    const handleTouchEnd = () => {
+      isTouchingRef.current = false;
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -58,8 +64,10 @@ export function CardEffect() {
     animationFrameRef.current = requestAnimationFrame(animate);
 
     // Add interaction listeners
-    card.addEventListener('touchstart', handleTouchStart, { passive: false });
-    card.addEventListener('touchmove', handleTouchMove, { passive: false });
+    card.addEventListener('touchstart', handleTouchStart);
+    card.addEventListener('touchmove', handleTouchMove);
+    card.addEventListener('touchend', handleTouchEnd);
+    card.addEventListener('touchcancel', handleTouchEnd);
     card.addEventListener('mousemove', handleMouseMove);
 
     return () => {
@@ -68,6 +76,8 @@ export function CardEffect() {
       }
       card.removeEventListener('touchstart', handleTouchStart);
       card.removeEventListener('touchmove', handleTouchMove);
+      card.removeEventListener('touchend', handleTouchEnd);
+      card.removeEventListener('touchcancel', handleTouchEnd);
       card.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
