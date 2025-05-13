@@ -28,9 +28,9 @@ export function CardEffect() {
       if (!timeRef.current) timeRef.current = timestamp;
       const progress = timestamp - timeRef.current;
       
-      // Create a gentle floating effect
-      const x = 50 + Math.sin(progress * 0.001) * 10;
-      const y = 50 + Math.cos(progress * 0.0008) * 10;
+      // Create a smooth ease-in-out floating effect
+      const x = 50 + Math.sin(progress * 0.0005) * 10;
+      const y = 50 + Math.cos(progress * 0.0004) * 10;
       
       document.documentElement.style.setProperty('--pointer-x', `${x}%`);
       document.documentElement.style.setProperty('--pointer-y', `${y}%`);
