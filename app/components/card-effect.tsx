@@ -6,12 +6,12 @@ export function CardEffect() {
   const cardRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number | undefined>(undefined);
   const timeRef = useRef<number>(0);
-  const isTouchingRef = useRef<boolean>(false);
-  const lastAnimationTimeRef = useRef<number>(0);
 
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
+
+    console.log('CardEffect mounted');
 
     // Set initial values
     document.documentElement.style.setProperty('--pointer-x', '50%');
@@ -27,11 +27,12 @@ export function CardEffect() {
     };
 
     const animate = (timestamp: number) => {
-      if (!timeRef.current) timeRef.current = timestamp;
-      const progress = timestamp - timeRef.current;
-      lastAnimationTimeRef.current = timestamp;
+      if (!timeRef.current) {
+        timeRef.current = timestamp;
+        console.log('Animation started');
+      }
       
-      // Create a gentle floating effect
+      const progress = timestamp - timeRef.current;
       const x = 50 + Math.sin(progress * 0.001) * 10;
       const y = 50 + Math.cos(progress * 0.0008) * 10;
       
@@ -41,20 +42,8 @@ export function CardEffect() {
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    // Fallback animation check
-    const checkAnimation = () => {
-      const now = performance.now();
-      if (now - lastAnimationTimeRef.current > 100) {
-        // Animation might have stopped, restart it
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-        }
-        animationFrameRef.current = requestAnimationFrame(animate);
-      }
-    };
-
     const handleTouchStart = (e: TouchEvent) => {
-      isTouchingRef.current = true;
+      console.log('Touch start');
       const touch = e.touches[0];
       handleMove(touch.clientX, touch.clientY);
     };
@@ -62,15 +51,6 @@ export function CardEffect() {
     const handleTouchMove = (e: TouchEvent) => {
       const touch = e.touches[0];
       handleMove(touch.clientX, touch.clientY);
-    };
-
-    const handleTouchEnd = () => {
-      isTouchingRef.current = false;
-      // Restart animation after touch ends
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -83,22 +63,15 @@ export function CardEffect() {
     // Add interaction listeners
     card.addEventListener('touchstart', handleTouchStart, { passive: true });
     card.addEventListener('touchmove', handleTouchMove, { passive: true });
-    card.addEventListener('touchend', handleTouchEnd);
-    card.addEventListener('touchcancel', handleTouchEnd);
     card.addEventListener('mousemove', handleMouseMove);
 
-    // Start the animation check interval
-    const checkInterval = setInterval(checkAnimation, 100);
-
     return () => {
+      console.log('CardEffect cleanup');
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
-      clearInterval(checkInterval);
       card.removeEventListener('touchstart', handleTouchStart);
       card.removeEventListener('touchmove', handleTouchMove);
-      card.removeEventListener('touchend', handleTouchEnd);
-      card.removeEventListener('touchcancel', handleTouchEnd);
       card.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
