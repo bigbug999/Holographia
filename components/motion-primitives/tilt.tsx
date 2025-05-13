@@ -53,14 +53,14 @@ export function Tilt({
 
   const transform = useMotionTemplate`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const updatePosition = (clientX: number, clientY: number) => {
     if (!ref.current) return;
 
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const mouseX = clientX - rect.left;
+    const mouseY = clientY - rect.top;
 
     const xPos = mouseX / width - 0.5;
     const yPos = mouseY / height - 0.5;
@@ -69,7 +69,22 @@ export function Tilt({
     y.set(yPos);
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    updatePosition(e.clientX, e.clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    updatePosition(touch.clientX, touch.clientY);
+  };
+
   const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const handleTouchEnd = () => {
     x.set(0);
     y.set(0);
   };
@@ -85,6 +100,8 @@ export function Tilt({
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {children}
     </motion.div>
