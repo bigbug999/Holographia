@@ -11,44 +11,41 @@ export function CardEffect() {
     const card = cardRef.current;
     if (!card) return;
 
-    console.log('CardEffect mounted');
-
     // Set initial values
-    document.documentElement.style.setProperty('--effect-x', '50%');
-    document.documentElement.style.setProperty('--effect-y', '50%');
+    document.documentElement.style.setProperty('--pointer-x', '50%');
+    document.documentElement.style.setProperty('--pointer-y', '50%');
 
     const handleMove = (clientX: number, clientY: number) => {
       const rect = card.getBoundingClientRect();
       const x = ((clientX - rect.left) / rect.width) * 100;
       const y = ((clientY - rect.top) / rect.height) * 100;
       
-      document.documentElement.style.setProperty('--effect-x', `${x}%`);
-      document.documentElement.style.setProperty('--effect-y', `${y}%`);
+      document.documentElement.style.setProperty('--pointer-x', `${x}%`);
+      document.documentElement.style.setProperty('--pointer-y', `${y}%`);
     };
 
     const animate = (timestamp: number) => {
-      if (!timeRef.current) {
-        timeRef.current = timestamp;
-        console.log('Animation started');
-      }
-      
+      if (!timeRef.current) timeRef.current = timestamp;
       const progress = timestamp - timeRef.current;
+      
+      // Create a gentle floating effect
       const x = 50 + Math.sin(progress * 0.001) * 10;
       const y = 50 + Math.cos(progress * 0.0008) * 10;
       
-      document.documentElement.style.setProperty('--effect-x', `${x}%`);
-      document.documentElement.style.setProperty('--effect-y', `${y}%`);
+      document.documentElement.style.setProperty('--pointer-x', `${x}%`);
+      document.documentElement.style.setProperty('--pointer-y', `${y}%`);
       
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     const handleTouchStart = (e: TouchEvent) => {
-      console.log('Touch start');
+      e.preventDefault();
       const touch = e.touches[0];
       handleMove(touch.clientX, touch.clientY);
     };
 
     const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
       const touch = e.touches[0];
       handleMove(touch.clientX, touch.clientY);
     };
@@ -61,12 +58,11 @@ export function CardEffect() {
     animationFrameRef.current = requestAnimationFrame(animate);
 
     // Add interaction listeners
-    card.addEventListener('touchstart', handleTouchStart, { passive: true });
-    card.addEventListener('touchmove', handleTouchMove, { passive: true });
+    card.addEventListener('touchstart', handleTouchStart, { passive: false });
+    card.addEventListener('touchmove', handleTouchMove, { passive: false });
     card.addEventListener('mousemove', handleMouseMove);
 
     return () => {
-      console.log('CardEffect cleanup');
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
