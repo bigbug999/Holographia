@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   motion,
   useMotionTemplate,
@@ -67,6 +67,14 @@ export function Tilt({
 
     x.set(xPos);
     y.set(yPos);
+
+    // Update background position
+    const bgX = ((mouseX / width) * 100);
+    const bgY = ((mouseY / height) * 100);
+    ref.current.style.setProperty('--pointer-x', `${bgX}%`);
+    ref.current.style.setProperty('--pointer-y', `${bgY}%`);
+    ref.current.style.setProperty('--posx', `${bgX}%`);
+    ref.current.style.setProperty('--posy', `${bgY}%`);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -82,11 +90,23 @@ export function Tilt({
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
+    if (ref.current) {
+      ref.current.style.setProperty('--pointer-x', '50%');
+      ref.current.style.setProperty('--pointer-y', '50%');
+      ref.current.style.setProperty('--posx', '50%');
+      ref.current.style.setProperty('--posy', '50%');
+    }
   };
 
   const handleTouchEnd = () => {
     x.set(0);
     y.set(0);
+    if (ref.current) {
+      ref.current.style.setProperty('--pointer-x', '50%');
+      ref.current.style.setProperty('--pointer-y', '50%');
+      ref.current.style.setProperty('--posx', '50%');
+      ref.current.style.setProperty('--posy', '50%');
+    }
   };
 
   return (
