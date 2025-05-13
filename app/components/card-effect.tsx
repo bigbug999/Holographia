@@ -9,34 +9,34 @@ export function CardEffect() {
     const card = cardRef.current;
     if (!card) return;
 
+    // Get the parent element that contains both card-front and card-effect
+    const parent = card.parentElement;
+    if (!parent) return;
+
     const handlePointerMove = (e: PointerEvent) => {
-      const rect = card.getBoundingClientRect();
+      const rect = parent.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       
-      console.log('Pointer position:', { x, y });
-      card.style.setProperty('--pointer-x', `${x}%`);
-      card.style.setProperty('--pointer-y', `${y}%`);
-      
-      // Log the computed style to verify the variables are set
-      console.log('CSS Variables:', {
-        x: getComputedStyle(card).getPropertyValue('--pointer-x'),
-        y: getComputedStyle(card).getPropertyValue('--pointer-y')
-      });
+      parent.style.setProperty('--pointer-x', `${x}%`);
+      parent.style.setProperty('--pointer-y', `${y}%`);
+      parent.style.setProperty('--posx', `${x}%`);
+      parent.style.setProperty('--posy', `${y}%`);
     };
 
     const handlePointerLeave = () => {
-      console.log('Pointer left');
-      card.style.setProperty('--pointer-x', '50%');
-      card.style.setProperty('--pointer-y', '50%');
+      parent.style.setProperty('--pointer-x', '50%');
+      parent.style.setProperty('--pointer-y', '50%');
+      parent.style.setProperty('--posx', '50%');
+      parent.style.setProperty('--posy', '50%');
     };
 
-    card.addEventListener('pointermove', handlePointerMove);
-    card.addEventListener('pointerleave', handlePointerLeave);
+    parent.addEventListener('pointermove', handlePointerMove);
+    parent.addEventListener('pointerleave', handlePointerLeave);
 
     return () => {
-      card.removeEventListener('pointermove', handlePointerMove);
-      card.removeEventListener('pointerleave', handlePointerLeave);
+      parent.removeEventListener('pointermove', handlePointerMove);
+      parent.removeEventListener('pointerleave', handlePointerLeave);
     };
   }, []);
 
