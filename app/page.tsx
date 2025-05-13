@@ -48,7 +48,7 @@ function TiltCard1() {
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white dark:bg-zinc-900 fixed inset-0 overflow-hidden overscroll-none touch-none">
+    <div className="flex h-[100dvh] items-center justify-center bg-white dark:bg-zinc-900 fixed inset-0 overflow-hidden overscroll-none touch-none">
       <TiltCard1 />
     </div>
   );
