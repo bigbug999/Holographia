@@ -227,25 +227,7 @@
     mix-blend-mode: overlay;
     pointer-events: none;
     will-change: background-position;
-    animation: float 8s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0% {
-      background-position: center, 50% 50%, 50% 50%, 50% 50%;
-    }
-    25% {
-      background-position: center, 50% 45%, 45% 45%, 45% 45%;
-    }
-    50% {
-      background-position: center, 50% 50%, 50% 50%, 50% 50%;
-    }
-    75% {
-      background-position: center, 50% 55%, 55% 55%, 55% 55%;
-    }
-    100% {
-      background-position: center, 50% 50%, 50% 50%, 50% 50%;
-    }
+    opacity: 0.85;
   }
 
   .card-rotator {

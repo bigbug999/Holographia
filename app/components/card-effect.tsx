@@ -4,12 +4,19 @@ import { useRef, useEffect } from 'react';
 
 export function CardEffect() {
   const cardRef = useRef<HTMLDivElement>(null);
+  const animationFrameRef = useRef<number | undefined>(undefined);
+  const timeRef = useRef<number>(0);
+  const isTouchingRef = useRef<boolean>(false);
 
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
 
-    const handleInteraction = (clientX: number, clientY: number) => {
+    // Set initial values
+    document.documentElement.style.setProperty('--pointer-x', '50%');
+    document.documentElement.style.setProperty('--pointer-y', '50%');
+
+    const handleMove = (clientX: number, clientY: number) => {
       const rect = card.getBoundingClientRect();
       const x = ((clientX - rect.left) / rect.width) * 100;
       const y = ((clientY - rect.top) / rect.height) * 100;
@@ -18,23 +25,61 @@ export function CardEffect() {
       document.documentElement.style.setProperty('--pointer-y', `${y}%`);
     };
 
-    const handleTouch = (e: TouchEvent) => {
+    const animate = (timestamp: number) => {
+      if (!timeRef.current) timeRef.current = timestamp;
+      const progress = timestamp - timeRef.current;
+      
+      // Only animate if not touching
+      if (!isTouchingRef.current) {
+        // Create a gentle floating effect
+        const x = 50 + Math.sin(progress * 0.001) * 10;
+        const y = 50 + Math.cos(progress * 0.0008) * 10;
+        
+        document.documentElement.style.setProperty('--pointer-x', `${x}%`);
+        document.documentElement.style.setProperty('--pointer-y', `${y}%`);
+      }
+      
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      isTouchingRef.current = true;
       const touch = e.touches[0];
-      handleInteraction(touch.clientX, touch.clientY);
+      handleMove(touch.clientX, touch.clientY);
     };
 
-    const handleMouse = (e: MouseEvent) => {
-      handleInteraction(e.clientX, e.clientY);
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      handleMove(touch.clientX, touch.clientY);
     };
 
-    // Add event listeners
-    card.addEventListener('touchmove', handleTouch, { passive: true });
-    card.addEventListener('mousemove', handleMouse);
+    const handleTouchEnd = () => {
+      isTouchingRef.current = false;
+    };
 
-    // Cleanup
+    const handleMouseMove = (e: MouseEvent) => {
+      handleMove(e.clientX, e.clientY);
+    };
+
+    // Start the continuous animation
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    // Add interaction listeners
+    card.addEventListener('touchstart', handleTouchStart, { passive: true });
+    card.addEventListener('touchmove', handleTouchMove, { passive: true });
+    card.addEventListener('touchend', handleTouchEnd);
+    card.addEventListener('touchcancel', handleTouchEnd);
+    card.addEventListener('mousemove', handleMouseMove);
+
     return () => {
-      card.removeEventListener('touchmove', handleTouch);
-      card.removeEventListener('mousemove', handleMouse);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      card.removeEventListener('touchstart', handleTouchStart);
+      card.removeEventListener('touchmove', handleTouchMove);
+      card.removeEventListener('touchend', handleTouchEnd);
+      card.removeEventListener('touchcancel', handleTouchEnd);
+      card.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
