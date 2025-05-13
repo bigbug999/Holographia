@@ -260,4 +260,46 @@
     border-radius: inherit;
     pointer-events: none;
   }
+
+  .card-tilt::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    background: 
+      url('/grain.webp'),
+      repeating-linear-gradient(
+        0deg,
+        var(--holographia-clr-1) calc(var(--space) * 1),
+        var(--holographia-clr-2) calc(var(--space) * 2),
+        var(--holographia-clr-3) calc(var(--space) * 3),
+        var(--holographia-clr-4) calc(var(--space) * 4),
+        var(--holographia-clr-5) calc(var(--space) * 5),
+        var(--holographia-clr-6) calc(var(--space) * 6),
+        var(--holographia-clr-1) calc(var(--space) * 7)
+      ),
+      repeating-linear-gradient(
+        var(--angle),
+        #0e152e 0%,
+        hsl(180, 10%, 60%) 3.8%,
+        hsl(180, 29%, 66%) 4.5%,
+        hsl(180, 10%, 60%) 5.2%,
+        #0e152e 10%,
+        #0e152e 12%
+      ),
+      radial-gradient(
+        farthest-corner circle at var(--pointer-x) var(--pointer-y),
+        hsla(0, 0%, 0%, 0.1) 12%,
+        hsla(0, 0%, 0%, 0.15) 20%,
+        hsla(0, 0%, 0%, 0.25) 120%
+      );
+    background-blend-mode: overlay, overlay, overlay, overlay;
+    background-size: 100%, 200% 400%, 195% 100%, 200% 100%;
+    background-position: center, 50% calc(100% - var(--posy)), calc(100% - var(--posx)) calc(100% - var(--posy)), calc(100% - var(--posx)) calc(100% - var(--posy));
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    will-change: background-position;
+  }
 }

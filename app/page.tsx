@@ -21,7 +21,49 @@ function TiltCard1() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            position: "relative"
+            position: "relative",
+            "&::after": {
+              content: '""',
+              position: "absolute",
+              inset: 0,
+              zIndex: 2,
+              borderRadius: "inherit",
+              background: `
+                url('/grain.webp'),
+                repeating-linear-gradient(
+                  0deg,
+                  var(--holographia-clr-1) calc(var(--space) * 1),
+                  var(--holographia-clr-2) calc(var(--space) * 2),
+                  var(--holographia-clr-3) calc(var(--space) * 3),
+                  var(--holographia-clr-4) calc(var(--space) * 4),
+                  var(--holographia-clr-5) calc(var(--space) * 5),
+                  var(--holographia-clr-6) calc(var(--space) * 6),
+                  var(--holographia-clr-1) calc(var(--space) * 7)
+                ),
+                repeating-linear-gradient(
+                  var(--angle),
+                  #0e152e 0%,
+                  hsl(180, 10%, 60%) 3.8%,
+                  hsl(180, 29%, 66%) 4.5%,
+                  hsl(180, 10%, 60%) 5.2%,
+                  #0e152e 10%,
+                  #0e152e 12%
+                ),
+                radial-gradient(
+                  farthest-corner circle at var(--pointer-x) var(--pointer-y),
+                  hsla(0, 0%, 0%, 0.1) 12%,
+                  hsla(0, 0%, 0%, 0.15) 20%,
+                  hsla(0, 0%, 0%, 0.25) 120%
+                )
+              `,
+              backgroundBlendMode: "overlay, overlay, overlay, overlay",
+              backgroundSize: "100%, 200% 700%, 300%, 200%",
+              backgroundPosition: "center, 50% var(--posy), var(--posx) var(--posy), var(--posx) var(--posy)",
+              backgroundRepeat: "repeat, no-repeat, no-repeat, no-repeat",
+              mixBlendMode: "overlay",
+              pointerEvents: "none",
+              willChange: "background-position"
+            }
           }}
         >
           <CardEffect />
