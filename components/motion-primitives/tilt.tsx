@@ -32,9 +32,13 @@ export function Tilt({
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const bgX = useMotionValue(50);
+  const bgY = useMotionValue(50);
 
   const xSpring = useSpring(x, springOptions);
   const ySpring = useSpring(y, springOptions);
+  const bgXSpring = useSpring(bgX, springOptions);
+  const bgYSpring = useSpring(bgY, springOptions);
 
   const rotateX = useTransform(
     ySpring,
@@ -53,6 +57,28 @@ export function Tilt({
 
   const transform = useMotionTemplate`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
+  // Update CSS variables when spring values change
+  useEffect(() => {
+    const unsubscribeX = bgXSpring.on('change', (latest) => {
+      if (ref.current) {
+        ref.current.style.setProperty('--pointer-x', `${latest}%`);
+        ref.current.style.setProperty('--posx', `${latest}%`);
+      }
+    });
+
+    const unsubscribeY = bgYSpring.on('change', (latest) => {
+      if (ref.current) {
+        ref.current.style.setProperty('--pointer-y', `${latest}%`);
+        ref.current.style.setProperty('--posy', `${latest}%`);
+      }
+    });
+
+    return () => {
+      unsubscribeX();
+      unsubscribeY();
+    };
+  }, [bgXSpring, bgYSpring]);
+
   const updatePosition = (clientX: number, clientY: number) => {
     if (!ref.current) return;
 
@@ -69,12 +95,10 @@ export function Tilt({
     y.set(yPos);
 
     // Update background position
-    const bgX = ((mouseX / width) * 100);
-    const bgY = ((mouseY / height) * 100);
-    ref.current.style.setProperty('--pointer-x', `${bgX}%`);
-    ref.current.style.setProperty('--pointer-y', `${bgY}%`);
-    ref.current.style.setProperty('--posx', `${bgX}%`);
-    ref.current.style.setProperty('--posy', `${bgY}%`);
+    const newBgX = ((mouseX / width) * 100);
+    const newBgY = ((mouseY / height) * 100);
+    bgX.set(newBgX);
+    bgY.set(newBgY);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -90,23 +114,15 @@ export function Tilt({
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
-    if (ref.current) {
-      ref.current.style.setProperty('--pointer-x', '50%');
-      ref.current.style.setProperty('--pointer-y', '50%');
-      ref.current.style.setProperty('--posx', '50%');
-      ref.current.style.setProperty('--posy', '50%');
-    }
+    bgX.set(50);
+    bgY.set(50);
   };
 
   const handleTouchEnd = () => {
     x.set(0);
     y.set(0);
-    if (ref.current) {
-      ref.current.style.setProperty('--pointer-x', '50%');
-      ref.current.style.setProperty('--pointer-y', '50%');
-      ref.current.style.setProperty('--posx', '50%');
-      ref.current.style.setProperty('--posy', '50%');
-    }
+    bgX.set(50);
+    bgY.set(50);
   };
 
   return (
