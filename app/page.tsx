@@ -13,7 +13,7 @@ function TiltCard1() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            border: "2px solid #222",
+            border: "2px solid #808080",
             borderRadius: 20,
             boxSizing: "border-box",
             boxShadow: "0 4px 24px 0 rgba(0,0,0,0.08)",
