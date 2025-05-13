@@ -194,6 +194,7 @@
     z-index: 2;
     border-radius: inherit;
     background: 
+      url('/grain.webp'),
       repeating-linear-gradient(
         0deg,
         var(--holographia-clr-1) calc(var(--space) * 1),
@@ -219,7 +220,10 @@
         hsla(0, 0%, 0%, 0.15) 20%,
         hsla(0, 0%, 0%, 0.25) 120%
       );
-    background-blend-mode: overlay;
+    background-blend-mode: overlay, overlay, overlay, overlay;
+    background-size: 100%, 200% 700%, 300%, 200%;
+    background-position: center, 50% var(--posy), var(--posx) var(--posy), var(--posx) var(--posy);
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat;
     mix-blend-mode: overlay;
     pointer-events: none;
     will-change: background-position;
