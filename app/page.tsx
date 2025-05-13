@@ -35,7 +35,7 @@ function TiltCard1() {
             style={{ position: 'relative', zIndex: 3 }}
           >
             {/* Large diamond background */}
-            <rect x="110" y="150" width="100" height="100" rx="10" transform="rotate(45 160 200)" fill="black" />
+            <rect x="110" y="150" width="100" height="100" rx="10" transform="rotate(0 160 200)" fill="black" />
             {/* Top left small black circle */}
             <circle cx="48" cy="48" r="24" fill="black" />
             {/* Bottom right small black circle */}
