@@ -227,6 +227,7 @@
     mix-blend-mode: overlay;
     pointer-events: none;
     will-change: background-position;
+    opacity: 0.85;
   }
 
   .card-rotator {
