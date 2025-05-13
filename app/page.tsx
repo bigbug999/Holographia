@@ -1,5 +1,6 @@
 import { Tilt } from '@/components/motion-primitives/tilt';
 import { CardEffect } from './components/card-effect';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 function TiltCard1() {
   return (
@@ -49,6 +50,9 @@ function TiltCard1() {
 export default function Home() {
   return (
     <div className="flex h-[100dvh] items-center justify-center bg-white dark:bg-zinc-900 fixed inset-0 overflow-hidden overscroll-none touch-none">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
       <TiltCard1 />
     </div>
   );
