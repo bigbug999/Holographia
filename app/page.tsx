@@ -11,7 +11,7 @@ function TiltCard1() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            border: "2px solid #222",
+            border: "2px solid #D3CEC4",
             borderRadius: 20,
             boxSizing: "border-box",
             boxShadow: "0 4px 24px 0 rgba(0,0,0,0.08)",
@@ -32,9 +32,7 @@ function TiltCard1() {
             style={{ position: 'relative', zIndex: 1 }}
           >
             {/* Large diamond background */}
-            <rect x="60" y="100" width="200" height="200" rx="10" transform="rotate(45 160 200)" fill="#D9D9D9" />
-            {/* Large black circle in center */}
-            <circle cx="160" cy="200" r="70" fill="black" />
+            <rect x="110" y="150" width="100" height="100" rx="10" transform="rotate(45 160 200)" fill="black" />
             {/* Top left small black circle */}
             <circle cx="48" cy="48" r="24" fill="black" />
             {/* Bottom right small black circle */}
